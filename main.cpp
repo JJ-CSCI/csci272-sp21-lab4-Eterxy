@@ -8,8 +8,46 @@ using Catch::Matchers::Equals;
 
 // Fix the following class
 class Complex {
-    void operator>>(std::string&) const;
-    void operator<<(const std::string&);
+  int Cone;
+  int Ctwo;
+public:
+  Complex():Cone{0}, Ctwo{0}{}
+  Complex(int one):Cone{0}, Ctwo{0} {
+    Cone = one;
+  }
+  Complex(int one, int two): Cone{0}, Ctwo{0}{
+    Cone = one;
+    Ctwo = two;
+  }
+  int re(){
+    return Cone;
+  }
+  int im(){
+    return Ctwo;
+  }
+  void operator>>(std::string& s) const{
+    s += std::to_string(Cone);
+    if (Ctwo < 0){
+      s += std::to_string(Ctwo);
+    }
+    else{
+      s += '+';
+      s += std::to_string(Ctwo);
+    }
+    s += 'i';
+  }
+  void operator<<(const std::string& a){
+    std::string b;
+    b = a;
+    Cone = std::stoi(a);
+    if (Cone < 0){
+      b.erase(0,2);
+    }
+    else{
+      b.erase(0,1);
+    }
+    Ctwo = std::stoi(b);
+  }
 };
 
 //------------------------------
